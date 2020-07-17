@@ -1,0 +1,20 @@
+:host {
+    .wrapper {
+        width: 50%;
+        margin: 0 auto;
+        h1 {
+            color: #673ab7;
+        }
+        .create-bookmark-container {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+    }
+    .mat-expansion-panel-body {
+        mat-card:not(:last-of-type) {
+            margin-bottom: 10px;
+        }
+    }
+    
+}

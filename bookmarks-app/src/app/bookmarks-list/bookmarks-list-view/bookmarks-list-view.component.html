@@ -1,0 +1,35 @@
+<mat-accordion *ngIf="bookmarkGroups?.length else noDataTpl">
+  <ng-container>
+    <mat-expansion-panel *ngFor="let group of bookmarkGroups"
+      [expanded]="expandCollapseMap[group.name]"
+      (opened)="expandCollapseMap[group.name] = true"
+      (closed)="expandCollapseMap[group.name] = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{group.name}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-list> 
+        <mat-list-item *ngFor="let bookmark of group.bookmarks"> 
+            <span mat-line>
+              <button (click)="navigateBookmark(bookmark.url)" mat-button color="primary">{{bookmark.name}}</button>
+              <span><i>{{bookmark.url}}</i></span>
+            </span>
+            
+            <span style="position:relative; right: 35x; cursor: pointer;"> 
+               <a (click)="removeBookmark(bookmark.name)">
+                  <mat-icon mat-list-icon>delete</mat-icon>
+               </a> 
+            </span> 
+         <mat-divider></mat-divider> 
+        </mat-list-item> 
+    </mat-list>
+    </mat-expansion-panel>
+  </ng-container>
+</mat-accordion>
+<ng-template #noDataTpl>
+  <div class="no-data-container">
+    <h3>No data found!</h3>
+    <span>Please create new bookmark!</span>
+  </div>
+</ng-template>

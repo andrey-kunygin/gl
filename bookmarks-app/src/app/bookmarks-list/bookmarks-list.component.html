@@ -1,0 +1,9 @@
+<div class="wrapper">
+    <h1>Bookmarks manager</h1>
+    <div class="create-bookmark-container">
+        <app-create-bookmark></app-create-bookmark>
+    </div>
+    <div class="bookmarks-list">
+        <app-bookmarks-list-view [bookmarkGroups]="groups | async"></app-bookmarks-list-view>
+    </div>
+</div>

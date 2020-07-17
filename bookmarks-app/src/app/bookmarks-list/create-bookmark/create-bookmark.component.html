@@ -1,0 +1,36 @@
+<div class="form-container">
+    <form [formGroup]="bookmarkForm" #formDirective="ngForm" (submit)="createBookmark(formDirective)">
+        <mat-form-field appearance="legacy" class="form-field">
+            <input autocomplete="off" placeholder="Bookmark name" matInput formControlName="name">
+            <mat-error *ngIf="bookmarkForm.controls.name.touched && bookmarkForm.controls.name.invalid">
+                <span *ngIf="bookmarkForm.controls.name.errors.required">This field is mandatory.</span>
+                <span *ngIf="bookmarkForm.controls.name.errors.nameExist">This name already exists.</span>
+                <span *ngIf="bookmarkForm.controls.name.errors.minlength">This name too short.</span>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="legacy" class="form-field">
+            <input autocomplete="off" placeholder="Bookmark url" matInput formControlName="url">
+            <mat-error *ngIf="bookmarkForm.controls.url.touched && bookmarkForm.controls.url.invalid">
+                <span *ngIf="bookmarkForm.controls.url.errors.required">This field is mandatory.</span>
+                <span *ngIf="bookmarkForm.controls.url.errors.pattern">Please enter correct url.</span>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="legacy">
+            <mat-select formControlName="group">
+                <mat-option *ngFor="let name of bookmarkGroupNames | async" value="{{name}}">{{name}}</mat-option>
+                <mat-option value="{{customGroupValue}}"><i>Custom group</i></mat-option>
+            </mat-select>
+            <mat-label> <i> Bookmark group</i></mat-label>
+            <mat-error *ngIf="bookmarkForm.controls.group.touched && bookmarkForm.controls.group.invalid">
+                <span *ngIf="bookmarkForm.controls.group.errors.required">This field is mandatory.</span>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field *ngIf="isCustomGroup$ | async" appearance="legacy" class="form-field">
+            <input autocomplete="off" placeholder="New bookmark group" matInput formControlName="newGroup">
+            <mat-error *ngIf="bookmarkForm.controls.newGroup.touched && bookmarkForm.controls.newGroup.invalid">
+                <span *ngIf="bookmarkForm.controls.newGroup.errors.required">This field is mandatory.</span>
+            </mat-error>
+        </mat-form-field>
+        <button [disabled]="bookmarkForm.status === 'INVALID'" mat-button color="primary" type="submit">Create bookmark</button>
+    </form>
+</div>
